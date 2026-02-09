@@ -6,7 +6,9 @@
   "bin": {
     "cleanports": "./bin/cleanports.js"
   },
-  "scripts": {},
+  "scripts": {
+    "postinstall": "node scripts/postinstall.js"
+  },
   "keywords": ["ports", "kill-port", "dev-tools", "node", "cli"],
   "author": "Shubhashish Chakraborty",
   "license": "MIT",
