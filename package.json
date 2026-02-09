@@ -1,6 +1,6 @@
 {
   "name": "portcleaner",
-  "version": "1.0.0",
+  "version": "1.0.1",
   "description": "A CLI utility that detects and terminates stuck development servers to free ports.",
   "main": "index.js",
   "preferGlobal": true,
@@ -13,7 +13,13 @@
   "engines": {
     "node": ">=16"
   },
-  "keywords": ["ports", "kill-port", "dev-tools", "node", "cli"],
+  "keywords": [
+    "ports",
+    "kill-port",
+    "dev-tools",
+    "node",
+    "cli"
+  ],
   "author": "Shubhashish Chakraborty",
   "license": "MIT",
   "type": "commonjs"
