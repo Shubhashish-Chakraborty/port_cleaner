@@ -1,0 +1,7 @@
+.git
+node_modules
+scripts
+*.log
+*.tgz
+.vscode
+.DS_Store
