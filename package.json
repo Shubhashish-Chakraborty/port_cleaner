@@ -1,0 +1,14 @@
+{
+  "name": "port_cleaner",
+  "version": "1.0.0",
+  "description": "Kill all development servers occupying ports.",
+  "main": "index.js",
+  "bin": {
+    "cleanports": "./bin/cleanports.js"
+  },
+  "scripts": {},
+  "keywords": ["ports", "kill-port", "dev-tools", "node", "cli"],
+  "author": "Shubhashish Chakraborty",
+  "license": "MIT",
+  "type": "commonjs"
+}
