@@ -98,7 +98,7 @@ npm install -g portcleaner
 Then run:
 
 ```
-portcleaner
+cleanports
 ```
 
 No configuration needed.
@@ -119,7 +119,7 @@ npm link
 Now you can run:
 
 ```
-portcleaner
+cleanports
 ```
 
 ---
@@ -190,7 +190,7 @@ npm unlink -g portcleaner
 After uninstalling:
 
 ```
-portcleaner
+cleanports
 ```
 
 will no longer work.
@@ -246,7 +246,7 @@ Then safely terminates them.
 
 ## Troubleshooting
 
-### `portcleaner: command not found`
+### `cleanports: command not found`
 
 Restart terminal or reopen shell.
 
