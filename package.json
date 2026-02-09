@@ -1,13 +1,17 @@
 {
   "name": "portcleaner",
   "version": "1.0.0",
-  "description": "Kill all development servers occupying ports.",
+  "description": "A CLI utility that detects and terminates stuck development servers to free ports.",
   "main": "index.js",
+  "preferGlobal": true,
   "bin": {
     "cleanports": "./bin/cleanports.js"
   },
   "scripts": {
     "postinstall": "node scripts/postinstall.js"
+  },
+  "engines": {
+    "node": ">=16"
   },
   "keywords": ["ports", "kill-port", "dev-tools", "node", "cli"],
   "author": "Shubhashish Chakraborty",
