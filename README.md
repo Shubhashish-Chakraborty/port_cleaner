@@ -1,8 +1,8 @@
-# 🧹 Clean Ports (cleanports CLI)
+# 🧹 PortCleaner CLI
 
 Instantly kill stuck development servers and free your ports.
 
-`cleanports` is a lightweight CLI tool that scans your system for running development servers (Node, Bun, Deno, Python, Docker proxies, etc.) and automatically releases the ports they are occupying.
+`portcleaner` is a lightweight CLI tool that scans your system for running development servers (Node, Bun, Deno, Python, Docker, etc.) and automatically releases the ports they are occupying.
 
 No more:
 
@@ -10,19 +10,21 @@ No more:
 EADDRINUSE: address already in use :::3000
 ```
 
+📦 npm package: [https://www.npmjs.com/package/portcleaner](https://www.npmjs.com/package/portcleaner)
+
 ---
 
-## 📚 Table of Contents
+## Table of Contents
 
 * [Why this exists](#why-this-exists)
 * [Features](#features)
 * [Supported Platforms](#supported-platforms)
-* [Quick Install (Automatic - Recommended)](#quick-install-automatic-recommended)
-* [Manual Installation (Local Development)](#manual-installation-local-development)
+* [Quick Install (Recommended)](#quick-install-recommended)
+* [Manual Installation (For Contributors)](#manual-installation-for-contributors)
 * [Usage](#usage)
-* [Add to your project workflow](#add-to-your-project-workflow)
-* [Uninstall / Disable cleanports](#uninstall--disable-cleanports)
-* [Re-enable later](#re-enable-later)
+* [Use inside your project](#use-inside-your-project)
+* [Uninstall / Disable](#uninstall--disable)
+* [Reinstall later](#reinstall-later)
 * [Requirements](#requirements)
 * [How it works](#how-it-works)
 * [Troubleshooting](#troubleshooting)
@@ -41,7 +43,7 @@ During development, servers often **do not shut down properly**:
 * Docker containers
 * AI coding agents
 
-Even after closing the terminal, the process continues running in the background and blocks ports.
+Even after closing the terminal, the process keeps running in the background and blocks ports.
 
 Developers repeatedly run:
 
@@ -50,11 +52,11 @@ lsof -i :3000
 kill -9 <PID>
 ```
 
-This tool automates that entire process.
+`portcleaner` automates this entire process.
 
 ---
 
-## ✨ Features
+## Features
 
 * Detects active listening ports
 * Finds development servers automatically
@@ -65,165 +67,155 @@ This tool automates that entire process.
 
 ---
 
-## 💻 Supported Platforms
+## Supported Platforms
 
-| OS                                 | Support        |
-| ---------------------------------- | -------------- |
-| macOS                              | ✅ Full support |
-| Linux (Ubuntu, Debian, Arch, etc.) | ✅ Full support |
-| Windows (WSL)                      | ✅ Supported    |
-| Windows (PowerShell / CMD native)  | ⚠️ Limited     |
+| OS                                 | Support      |
+| ---------------------------------- | ------------ |
+| macOS                              | Full support |
+| Linux (Ubuntu, Debian, Arch, etc.) | Full support |
+| Windows (WSL)                      | Supported    |
+| Windows PowerShell / CMD           | Limited      |
 
-### Important for Windows users
+### Windows users
 
-Windows does not include the `lsof` utility.
-Please run this tool inside:
+Windows does not include the `lsof` utility by default.
+
+Please run the tool inside:
 
 * WSL (recommended)
 * Git Bash
 
 ---
 
-## 🚀 Quick Install (Automatic — Recommended)
+## Quick Install (Recommended)
 
-This is the **normal user method**.
-
-```
-npm install -g clean-ports
-```
-
-After installation, simply run:
+Install globally from npm:
 
 ```
-cleanports
+npm install -g portcleaner
 ```
 
-That’s it. No linking. No configuration.
+Then run:
 
-The installer automatically:
+```
+portcleaner
+```
 
-* registers the CLI command
-* grants permissions
-* verifies environment
+No configuration needed.
 
 ---
 
-## 🛠 Manual Installation (Local Development)
+## Manual Installation (For Contributors)
 
-Use this if you cloned the repository.
+If you cloned the repository:
 
 ```
-git clone https://github.com/<your-username>/clean-ports.git
-cd clean-ports
+git clone https://github.com/<your-username>/port_cleaner.git
+cd port_cleaner
 npm install
 npm link
 ```
 
-Now the command works globally:
+Now you can run:
 
 ```
-cleanports
-```
-
----
-
-## ▶️ Usage
-
-Run:
-
-```
-cleanports
-```
-
-Example output:
-
-```
-🔍 Scanning for running dev servers...
-
-⚠️ Found running servers:
-
-• node running on port 3000 (PID 5542)
-• docker-proxy running on port 5432 (PID 8821)
-
-🧹 Cleaning ports...
-
-❌ Killed node on port 3000
-❌ Killed docker-proxy on port 5432
-
-🎉 All development ports cleaned!
+portcleaner
 ```
 
 ---
 
-## 🔁 Add to your project workflow
+## Usage
 
-You can automatically clean ports before starting your app.
+```
+portcleaner
+```
 
-Add inside any project's `package.json`:
+Example:
+
+```
+Scanning for running dev servers...
+
+Found running servers:
+• node on port 3000
+• docker-proxy on port 5432
+
+Cleaning ports...
+
+Killed node on port 3000
+Killed docker-proxy on port 5432
+
+All development ports cleaned!
+```
+
+---
+
+## Use inside your project
+
+Automatically clean ports before starting your app.
+
+Add to `package.json`:
 
 ```
 "scripts": {
-  "dev": "cleanports && npm run start"
+  "dev": "portcleaner && next dev"
 }
 ```
 
-or for Next.js:
+or:
 
 ```
-"dev": "cleanports && next dev"
+"scripts": {
+  "dev": "portcleaner && nodemon src/index.js"
+}
 ```
 
-Now every time your project starts → ports are cleaned first.
+Now every time the project starts → ports are freed first.
 
 ---
 
-## ❌ Uninstall / Disable cleanports
+## Uninstall / Disable
 
-If you no longer want the `cleanports` command on your system:
-
-### If installed globally (recommended install)
+To remove the command from your system:
 
 ```
-npm uninstall -g clean-ports
+npm uninstall -g portcleaner
 ```
 
-### If installed via `npm link`
-
-Inside the project folder:
+If installed via `npm link`:
 
 ```
-npm unlink -g clean-ports
+npm unlink -g portcleaner
 ```
 
-After uninstalling, running:
+After uninstalling:
 
 ```
-cleanports
+portcleaner
 ```
 
 will no longer work.
 
 ---
 
-## 🔄 Re-enable later
+## Reinstall later
 
-You can always reinstall:
+You can enable it again anytime:
 
 ```
-npm install -g clean-ports
+npm install -g portcleaner
 ```
 
 The command will immediately start working again.
 
 ---
 
-## 📦 Requirements
+## Requirements
 
-* Node.js v16 or newer
-* macOS or Linux (native support)
+* Node.js 16 or newer
+* macOS or Linux (native)
 * Windows requires WSL or Git Bash
 
-Check Node version:
+Check:
 
 ```
 node -v
@@ -231,15 +223,15 @@ node -v
 
 ---
 
-## ⚙️ How it works
+## How it works
 
-The CLI internally runs:
+Internally the CLI runs:
 
 ```
 lsof -i -P -n | grep LISTEN
 ```
 
-It filters only known development processes:
+It filters development processes such as:
 
 * node
 * bun
@@ -248,59 +240,60 @@ It filters only known development processes:
 * docker
 * docker-proxy
 
-Then safely terminates them using system signals.
+Then safely terminates them.
 
 ---
 
-## 🧯 Troubleshooting
+## Troubleshooting
 
-### `cleanports: command not found`
+### `portcleaner: command not found`
 
-Restart terminal or run:
+Restart terminal or reopen shell.
 
-```
-source ~/.zshrc
-```
+### Nothing was cleaned
 
----
-
-### Permission denied
-
-```
-chmod +x bin/cleanports.js
-```
-
----
-
-### Nothing was killed
-
-Verify something is actually using a port:
+Check if a port is actually in use:
 
 ```
 lsof -i :3000
 ```
 
+### Windows not working
+
+Use WSL:
+
+```
+wsl
+npm install -g portcleaner
+portcleaner
+```
+
 ---
 
-## 🤝 Contributing
+## Contributing
 
 Pull requests are welcome.
 
-Possible improvements:
+Ideas:
 
-* interactive confirmation mode
-* port range filtering
-* Windows native support
-* database port exclusions (5432, 27017)
-
----
-
-## 📄 License
-
-MIT
+* port specific cleaning (`portcleaner 3000`)
+* interactive mode
+* skip database ports (5432, 27017)
+* native Windows support
 
 ---
 
-## 👨‍💻 Author
+## License
 
-Shubhashish Chakraborty
+[MIT](LICENSE)
+
+---
+
+## Author
+
+Created and maintained by [Shubhashish Chakraborty](https://imshubh.site) <br/>
+For any queries, reach out via email at shubhashish147@gmail.com. <br/>
+
+[![Twitter](https://img.shields.io/badge/Twitter-%231DA1F2.svg?logo=Twitter&logoColor=white)](https://twitter.com/__Shubhashish__)
+[![GitHub](https://img.shields.io/badge/GitHub-%2312100E.svg?logo=github&logoColor=white)](https://github.com/Shubhashish-Chakraborty)
+[![LinkedIn](https://img.shields.io/badge/LinkedIn-%230077B5.svg?logo=linkedin&logoColor=white)](https://linkedin.com/in/shubhashish-chakraborty)
