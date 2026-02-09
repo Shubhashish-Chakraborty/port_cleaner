@@ -1,5 +1,5 @@
 {
-  "name": "port_cleaner",
+  "name": "portcleaner",
   "version": "1.0.0",
   "description": "Kill all development servers occupying ports.",
   "main": "index.js",
