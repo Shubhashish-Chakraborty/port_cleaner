@@ -1,6 +1,6 @@
 {
   "name": "portcleaner",
-  "version": "1.0.3",
+  "version": "1.0.4",
   "description": "A CLI utility that detects and terminates stuck development servers to free ports.",
   "main": "index.js",
   "preferGlobal": true,
